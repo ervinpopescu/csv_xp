@@ -1,0 +1,8 @@
+xp:
+  host: "localhost"
+  port: "8081"
+
+proc: 
+  host: "localhost"
+  port: "8082"
+  

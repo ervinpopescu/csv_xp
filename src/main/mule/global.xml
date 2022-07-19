@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:apikit="http://www.mulesoft.org/schema/mule/mule-apikit"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+http://www.mulesoft.org/schema/mule/mule-apikit http://www.mulesoft.org/schema/mule/mule-apikit/current/mule-apikit.xsd 
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd">
+	<configuration-properties doc:name="Configuration properties" doc:id="9ccdcde3-6d3f-4404-aadc-eaa01668ddfa" file="config.yaml" />
+	<http:request-config name="HTTP_Request_configuration" doc:name="HTTP Request configuration" doc:id="f33c015a-1a2c-4907-8f1a-525bd4593c96" >
+		<http:request-connection host="${proc.host}" port="${proc.port}" />
+	</http:request-config>
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="55da5769-4b76-4de4-b992-874b05c808c7" >
+		<http:listener-connection host="${xp.host}" port="${xp.port}" />
+	</http:listener-config>
+	<apikit:config name="csv_xp-config" api="resource::1a6f614f-782b-4f62-a5bd-e043a80391c6:csv_xp:1.0.2:raml:zip:csv_xp.raml" outboundHeadersMapName="outboundHeaders" httpStatusVarName="httpStatus" />
+</mule>

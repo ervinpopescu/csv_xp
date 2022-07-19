@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<flow name="get_xp" doc:id="67c912e7-e352-473a-adc7-a4c6c6813d12" >
+		<logger level="INFO" doc:name='"Requesting GET /client from system API"' doc:id="566e19c1-d307-4206-9ff6-75f94029ddf1" message='#["Requesting GET from system API"]'/>
+		<http:request method="GET" doc:name="GET /client" doc:id="a84e60cd-da02-4a13-b073-0e09717df0aa" config-ref="HTTP_Request_configuration" path="/client"/>
+		<logger level="INFO" doc:name='"GET /client response from system API"' doc:id="19dc5215-5a6d-4843-b10c-e0f4f23bf2a5" message='#["GET response from system API"]'/>
+	</flow>
+</mule>
