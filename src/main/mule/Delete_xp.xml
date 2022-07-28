@@ -5,8 +5,15 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
 http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
 	<flow name="delete_xp" doc:id="16f43865-ed67-4f19-a9fd-b6b425b64cfb" >
-		<logger level="INFO" doc:name='"Requesting DELETE /client from system API"' doc:id="3e376af6-7ad1-4e99-a370-706af3791d6a" message='#["Requesting GET /client from system API"]'/>
-		<http:request method="DELETE" doc:name="DELETE /client" doc:id="aceff0c7-e146-465b-ad78-a568d1129a5c" path="/client" config-ref="HTTP_Request_configuration"/>
-		<logger level="INFO" doc:name='"DELETE /client response from system API"' doc:id="6473f36a-7f6a-4983-9a97-db5d4cdde3ed" message='#["DELETE response from system API"]'/>
+		<logger level="INFO" doc:name='"DELETE /client request"' doc:id="3e376af6-7ad1-4e99-a370-706af3791d6a" message='#["Requesting GET /client from system API"]'/>
+		<set-variable value="#[message.attributes.queryParams.client_key]" doc:name="client_key" doc:id="36de9413-3fff-404f-b806-4e2797e286c3" variableName="client_key" />
+		<http:request method="DELETE" doc:name="DELETE /client" doc:id="aceff0c7-e146-465b-ad78-a568d1129a5c" path="/api/client" config-ref="HTTP_Request_configuration">
+			<http:query-params ><![CDATA[#[output application/java
+---
+{
+	"client_key" : vars.client_key
+}]]]></http:query-params>
+		</http:request>
+		<logger level="INFO" doc:name='"DELETE /client response"' doc:id="6473f36a-7f6a-4983-9a97-db5d4cdde3ed" message='#["DELETE response from system API"]'/>
 	</flow>
 </mule>

@@ -5,8 +5,8 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
 http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
 	<flow name="post_xp" doc:id="dc6fc751-dd53-4b8e-99f8-4bca1b0a0849" >
-		<logger level="INFO" doc:name="Before POST /client" doc:id="c85994b7-374d-40e6-9f6b-9e112a59a59f" message='#["Before POST /client"]'/>
-		<http:request method="POST" doc:name="POST /client" doc:id="c2dd9c28-81ff-499d-886f-d5306ef04648" config-ref="HTTP_Request_configuration" path="/client"/>
-		<logger level="INFO" doc:name="After POST /client" doc:id="0a5c2b59-ce4d-4d20-bc28-ffd843e58d10" message='#["After POST /client"]'/>
+		<logger level="INFO" doc:name='"POST /client request"' doc:id="c85994b7-374d-40e6-9f6b-9e112a59a59f" message='#["POST /client request"]'/>
+		<http:request method="POST" doc:name="POST /client" doc:id="c2dd9c28-81ff-499d-886f-d5306ef04648" config-ref="HTTP_Request_configuration" path="/api/client"/>
+		<logger level="INFO" doc:name='"POST /client response"' doc:id="0a5c2b59-ce4d-4d20-bc28-ffd843e58d10" message='#["POST /client response"]'/>
 	</flow>
 </mule>
