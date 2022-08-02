@@ -123,6 +123,38 @@ output application/json
         <logger level="INFO" doc:name="&quot;Entering delete_xp&quot;" doc:id="b545fcbc-be41-477a-b375-6c5d50b908cf" message="#[&quot;Entering delete_xp&quot;]" />
         <flow-ref doc:name="delete_xp" doc:id="80d9fb4a-3ccf-407e-9b16-789355ad4c9e" name="delete_xp" />
         <logger level="INFO" doc:name="&quot;Returning from delete_xp&quot;" doc:id="8b9f736c-0056-4d8b-a5b9-2f471ce4aab6" message="#[&quot;Returning from delete_xp&quot;]" />
+		<error-handler >
+			<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="c7ca876e-c579-4b14-b478-6eff31533acb" type="HTTP:BAD_REQUEST" >
+				<ee:transform doc:name="Invalid client_key" doc:id="042990e0-da32-4eda-b724-2c46bd0aa99f" >
+					<ee:message >
+						<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+	message: "Invalid client_key"
+}]]></ee:set-payload>
+					</ee:message>
+					<ee:variables >
+						<ee:set-variable variableName="httpStatus" ><![CDATA[400]]></ee:set-variable>
+					</ee:variables>
+				</ee:transform>
+			</on-error-propagate>
+			<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="d327e72d-eb98-4adc-ae2e-02e926f5bcfb" type="HTTP:NOT_FOUND" >
+				<ee:transform doc:name="No file" doc:id="24563ace-0c58-4e20-ab7c-aabbf710f512" >
+					<ee:message >
+						<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+	message: "No files or records found inside the folder."
+}]]></ee:set-payload>
+					</ee:message>
+					<ee:variables >
+						<ee:set-variable variableName="httpStatus" ><![CDATA[404]]></ee:set-variable>
+					</ee:variables>
+				</ee:transform>
+			</on-error-propagate>
+		</error-handler>
     </flow>
     <flow name="get:\client:csv_xp-config">
         <logger level="INFO" doc:name="&quot;Entering get_xp&quot;" doc:id="76e24859-62f7-495b-ac42-400b4ea38c0a" message="#[&quot;Entering Retrieve_xp&quot;]" />
@@ -148,5 +180,22 @@ output application/json
         <logger level="INFO" doc:name="&quot;Entering post_xp&quot;" doc:id="00e5b501-99fd-43db-95d5-61add4b513d9" message="#[&quot;Entering post_xp&quot;]" />
         <flow-ref doc:name="post_xp" doc:id="168bc634-d84f-4dc4-8e5d-ad99f8490c1d" name="post_xp" />
         <logger level="INFO" doc:name="&quot;Returning from post_xp&quot;" doc:id="59a095a6-50a4-4321-9e87-7d977f384788" message="&quot;Returning from post_xp&quot;" />
+		<error-handler>
+			<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="813f2861-459b-4c53-a533-0c08c6313def" type="HTTP:BAD_REQUEST">
+				<ee:transform doc:name="Bad request" doc:id="66aa20d0-a53c-4761-8a95-bd883232ece6">
+					<ee:message>
+						<ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+{
+	message: "Bad request"
+}]]></ee:set-payload>
+					</ee:message>
+					<ee:variables>
+						<ee:set-variable variableName="httpStatus"><![CDATA[400]]></ee:set-variable>
+					</ee:variables>
+				</ee:transform>
+			</on-error-propagate>
+		</error-handler>
     </flow>
 </mule>
